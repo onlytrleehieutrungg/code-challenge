@@ -1,0 +1,19 @@
+# Issues Found: #
+Inefficient Sorting and Filtering
+- Filtering Logic: The filtering function in useMemo checks lhsPriority instead of balancePriority, leading to potential errors.
+- Sorting Logic: The sorting function redundantly compares blockchain priorities twice (leftPriority and rightPriority).
+
+Redundant Mapping: Both sortedBalances and formattedBalances duplicate the mapping and formatting operations (map followed by toFixed()).
+
+Suboptimal Price Calculation: usdValue is calculated inside the rows mapping function, which could be inefficient if prices is large or if re-renders are frequent.
+
+Non-Optimal Switch Statement: getPriority uses a switch statement for priorities, which could be improved using a lookup object for better scalability.
+
+# Improvements Made: #
+Simplified the sorting logic to directly use getPriority for comparisons.
+
+Combined mapping and formatting operations into a single useMemo call for rows.
+
+Moved usdValue calculation into useMemo to optimize performance.
+
+Replaced the switch statement in getPriority with a lookup object (priorities) for clearer and more scalable priority assignment.
