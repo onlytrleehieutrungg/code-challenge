@@ -1,4 +1,4 @@
-import { InputAdornment } from "@mui/material";
+import { InputAdornment, SxProps, Theme } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import * as React from "react";
@@ -8,9 +8,10 @@ import { currencies } from "../../utils/mockData";
 type RenderGroupProps = {
   setPrice: React.Dispatch<React.SetStateAction<Price>>;
   price: Price;
+  sx?: SxProps<Theme>;
 };
 
-export default function RenderGroup({ price, setPrice }: RenderGroupProps) {
+export default function RenderGroup({ price, setPrice, sx }: RenderGroupProps) {
   const [previousOption, setPreviousOption] = React.useState(price);
   const [clearEvent, setClearEvent] = React.useState(false);
 
@@ -20,6 +21,7 @@ export default function RenderGroup({ price, setPrice }: RenderGroupProps) {
       id="grouped-demo"
       options={currencies}
       value={price}
+      sx={sx}
       // groupBy={(option) => option.currency}
       getOptionLabel={(option) => option.currency}
       onChange={(event, newValue, reason) => {
